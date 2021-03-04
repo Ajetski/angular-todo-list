@@ -8,7 +8,7 @@ import { TaskService } from './services/task.service';
 	templateUrl: 'app.component.html'
 })
 export class AppComponent implements OnInit {
-	list: Task[] = [];
+	list: Task[];
 
 	alert: {
 		show: boolean,
@@ -38,10 +38,7 @@ export class AppComponent implements OnInit {
 
 	async ngOnInit() {
 		try {
-			const res = await this.taskService.getTasks().toPromise();
-			this.list = res.map(({'_id': id, text, completed}) => ({
-				id, text, completed
-			}));
+			this.list = await this.taskService.getTasks().toPromise();
 			this.handleSuccess('fetched tasks');
 		} catch (err) {
 			this.handleError(err);
@@ -51,12 +48,10 @@ export class AppComponent implements OnInit {
 	async onAddItem(input: HTMLInputElement) {
 		try {
 			if (input.value) {
-				const {'_id': id, text, completed} =
-					await this.taskService.addTask({
-						text: input.value,
-						completed: false
-					}).toPromise();
-				this.list.push({id, text, completed});
+				this.list.push(await this.taskService.addTask({
+					text: input.value,
+					completed: false
+				}).toPromise());
 				input.value = '';
 				input.focus();
 				this.handleSuccess('added task');
