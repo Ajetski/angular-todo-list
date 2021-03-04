@@ -27,8 +27,11 @@
 				</app-task>
 			</li>
 		</ul>
-		<p *ngIf="!list || list.length === 0">
+		<p *ngIf="list != null && list.length === 0">
 			Add some items to your list!
+		</p>
+		<p *ngIf="!list">
+			Loading...
 		</p>
 	</div>
 </div>
