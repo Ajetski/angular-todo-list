@@ -1,0 +1,27 @@
+button.delete-button {
+    color: red;
+    padding-top: 0;
+    padding-bottom: 0; 
+    background-color: white;
+    border: 0;
+}
+
+button.delete-button:hover {
+    cursor: pointer;
+}
+
+div.task {
+    width: fit-content;
+}
+
+div.task:hover {
+    cursor: pointer;
+}
+
+div.task button.delete-button {
+    visibility: hidden;
+}
+
+div.task:hover button.delete-button {
+    visibility: visible;
+}

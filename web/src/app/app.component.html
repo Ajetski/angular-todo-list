@@ -1,0 +1,31 @@
+<div class="m-3 container">
+	<div class="inputs row">
+		<input type="text"
+			class="form-control w-25 mr-2"
+			(keyup.enter)="onAddItem(input)"
+			#input>
+		<div class="btn-group">
+			<button
+				(click)="onAddItem(input)"
+				class="btn btn-primary my-auto">
+				Add Item
+			</button>
+			<button (click)="onDeleteCompletedItems()"
+				class="btn btn-danger">
+				Delete Completed Items
+			</button>
+		</div>
+	</div>
+	<div class="mt-3">
+		<ul *ngIf="list && list.length > 0">
+			<li *ngFor="let item of list; index as idx">
+				<app-task [(item)]="list[idx]"
+					(delete)="onDeleteItem(idx)">
+				</app-task>
+			</li>
+		</ul>
+		<p *ngIf="!list || list.length === 0">
+			Add some items to your list!
+		</p>
+	</div>
+</div>
