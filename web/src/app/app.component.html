@@ -1,3 +1,6 @@
+<p *ngIf="alert.show" class="w-50 mx-auto mt-3">
+	<ngb-alert [type]="alert.type" (close)="alert.show = false;">{{alert.msg}}</ngb-alert>
+</p>
 <div class="m-3 container">
 	<div class="inputs row">
 		<input type="text"
