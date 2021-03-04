@@ -3,37 +3,29 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Task } from '../models/task';
 
+type MongoTask = {
+  '_id': string,
+  text: string,
+  completed: boolean
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  constructor(private http: HttpClient) {
-    this.getTasks();
-  }
+  constructor(private http: HttpClient) {}
 
   getTasks() {
-    return this.http.get<{
-      '_id': string,
-      text: string,
-      completed: boolean
-    }[]>(`${environment.apiBase}/task`);
+    return this.http.get<MongoTask[]>(`${environment.apiBase}/task`);
   }
 
   addTask(task: Task) {
-    return this.http.post<{
-      '_id': string,
-      text: string,
-      completed: boolean
-    }>(`${environment.apiBase}/task`, task);
+    return this.http.post<MongoTask>(`${environment.apiBase}/task`, task);
   }
 
   updateTask(task: Task) {
-    return this.http.post<{
-      '_id': string,
-      text: string,
-      completed: boolean
-    }>(`${environment.apiBase}/task/${task.id}`, task);
+    return this.http.post<MongoTask>(`${environment.apiBase}/task/${task.id}`, task);
   }
 
   deleteTask(task: Task) {
